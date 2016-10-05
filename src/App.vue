@@ -15,9 +15,9 @@
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon">Token name</span>
-          <input type="text" class="form-control" v-model="VPM.token">
+          <input type="text" class="form-control" v-model="VPM.token_name">
         </div>
-        <input class="form-control">
+        <textarea class="form-control">{{ VPM.token }}</textarea>
       </div>
 
 
@@ -27,7 +27,7 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-default" @click="show">GET</button>
+        <button class="btn btn-default">GET</button>
         <button class="btn btn-primary">POST</button>
         <button class="btn btn-success">PUT</button>
         <button class="btn btn-info">PATCH</button>
@@ -56,14 +56,17 @@
         VPM: {
           content: 'test',
           status: '000',
-          token: 'token'
+          token_name: 'token'
         }
       }
     },
     methods: {
-      show () {
-//        let VPM = this.VPM;
-
+      getTokenFromLocalStorage: function () {
+        var tokenName = this.VPM.token_name
+        this.VPM.token = window.localStorage[tokenName]
+      },
+      sentRequest: function () {
+        //
       }
     }
   }
