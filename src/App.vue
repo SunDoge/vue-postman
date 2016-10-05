@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <form>
+    <div class="form">
 
       <div class="form-group">
         <label>Address</label>
@@ -44,7 +44,7 @@
         <label>Content</label>
         <textarea class="form-control" rows="5">{{ VPM.content }}</textarea>
       </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -85,6 +85,7 @@
         var tokenName = this.VPM.token_name
 //        this.$set('VPM.token', window.localStorage[tokenName])
         this.VPM.token = window.localStorage[tokenName]
+        console.log(this.VPM.token)
       },
       sentRequest: function () {
         //
