@@ -13,6 +13,15 @@
       </div>
 
       <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">Token name</span>
+          <input type="text" class="form-control" v-model="VPM.token">
+        </div>
+        <input class="form-control">
+      </div>
+
+
+      <div class="form-group">
         <label>Data</label>
         <textarea class="form-control" v-model="VPM.data"></textarea>
       </div>
@@ -46,7 +55,8 @@
       return {
         VPM: {
           content: 'test',
-          status: '000'
+          status: '000',
+          token: 'token'
         }
       }
     },

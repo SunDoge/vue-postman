@@ -1,6 +1,6 @@
 # vue-postman
 
-> A Vue.js project works like postman for wecaht.
+> A Vue.js project works like postman for wechat.
 
 ## Build Setup
 
