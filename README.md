@@ -1,6 +1,6 @@
 # vue-postman
 
-> A Vue.js project work like postman
+> A Vue.js project works like postman for wecaht.
 
 ## Build Setup
 
