@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <form role="form">
+    <form>
 
       <div class="form-group">
         <label>Address</label>
@@ -14,8 +14,8 @@
 
       <div class="form-group">
         <div class="input-group">
-          <span class="input-group-addon">Token name</span>
-          <input type="text" class="form-control" v-model="VPM.token_name">
+          <input type="text" class="form-control" v-model="VPM.token_name" placeholder="Token Name">
+          <span class="input-group-addon" @click="getTokenFromLocalStorage">Get it!</span>
         </div>
         <textarea class="form-control">{{ VPM.token }}</textarea>
       </div>
@@ -54,11 +54,13 @@
 
   export default {
     data () {
+      let token = window.localStorage.token
       return {
         VPM: {
           content: 'test',
           status: '000',
-          token_name: 'token'
+          token_name: 'token',
+          token: token
         },
         methods: [{
           'name': 'GET',
@@ -81,7 +83,8 @@
     methods: {
       getTokenFromLocalStorage: function () {
         var tokenName = this.VPM.token_name
-        this.$set('VPM.token', window.localStorage[tokenName])
+//        this.$set('VPM.token', window.localStorage[tokenName])
+        this.VPM.token = window.localStorage[tokenName]
       },
       sentRequest: function () {
         //
