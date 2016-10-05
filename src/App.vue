@@ -27,8 +27,9 @@
       </div>
 
       <div class="form-group">
-        <button v-for="item in methods" class="btn" v-bind:class="[item.class]" @click="send(item.name)">{{item.name}}</button>
-        
+        <button v-for="item in methods" class="btn" v-bind:class="[item.class]" @click="send(item.name)">{{item.name}}
+        </button>
+
         <!--<button class="btn btn-default" @click="send(1)">GET</button>
         <button class="btn btn-primary"  @click="send(2)">POST</button>
         <button class="btn btn-success" @click="send(3)">PUT</button>
@@ -37,7 +38,7 @@
       </div>
 
       <div class="form-group">
-        <label>Status <span class="">{{ VPM.status }}</span></label>
+        <label>Status code:{<span class="">{{ VPM.status }}</span>} text:{<span>{{ VPM.status_text }}</span>}</label>
       </div>
 
       <div class="form-group">
@@ -57,8 +58,13 @@
       let token = window.localStorage.token
       return {
         VPM: {
+          headers: {
+            'content-type': 'application/json',
+            'cache-control': 'no-cache'
+          },
           content: 'test',
           status: '000',
+          status_text: 'prepared',
           token_name: 'token',
           token: token
         },
@@ -87,11 +93,29 @@
         this.VPM.token = window.localStorage[tokenName]
         console.log(this.VPM.token)
       },
-      sentRequest: function () {
-        //
+      sentRequest: function (method) {
+        let vpm = this.VPM
+        this.$http({
+          method: method,
+          url: vpm.url,
+          data: vpm.data,
+          headers: vpm.headers,
+          emulateJSON: true
+        }).then((response) => {
+          let vpm = this.VPM
+          vpm.status = response.status
+          vpm.status_text = response.statusText
+          let body = response.body
+          vpm.content = body
+          console.log(body)
+        }, (response) => {
+          console.log(response)
+        })
       },
       send: function (method) {
+        this.sentRequest(method)
         console.log(method)
+        console.log(this.VPM.data)
       }
     }
   }
