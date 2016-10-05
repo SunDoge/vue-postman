@@ -27,11 +27,13 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-default">GET</button>
-        <button class="btn btn-primary">POST</button>
-        <button class="btn btn-success">PUT</button>
-        <button class="btn btn-info">PATCH</button>
-        <button class="btn btn-danger">DELETE</button>
+        <button v-for="item in methods" class="btn" v-bind:class="[item.class]" @click="send(item.name)">{{item.name}}</button>
+        
+        <!--<button class="btn btn-default" @click="send(1)">GET</button>
+        <button class="btn btn-primary"  @click="send(2)">POST</button>
+        <button class="btn btn-success" @click="send(3)">PUT</button>
+        <button class="btn btn-info" @click="send(4)">PATCH</button>
+        <button class="btn btn-danger" @click="send(5)">DELETE</button>-->
       </div>
 
       <div class="form-group">
@@ -57,48 +59,67 @@
           content: 'test',
           status: '000',
           token_name: 'token'
-        }
+        },
+        methods: [{
+          'name': 'GET',
+          'class': 'btn-default'
+        }, {
+          'name': 'POST',
+          'class': 'btn-primary'
+        }, {
+          'name': 'PUT',
+          'class': 'btn-success'
+        }, {
+          'name': 'PATCH',
+          'class': 'btn-info'
+        }, {
+          'name': 'DELETE',
+          'class': 'btn-danger'
+        }]
       }
     },
     methods: {
       getTokenFromLocalStorage: function () {
         var tokenName = this.VPM.token_name
-        this.VPM.token = window.localStorage[tokenName]
+        this.$set('VPM.token', window.localStorage[tokenName])
       },
       sentRequest: function () {
         //
+      },
+      send: function (method) {
+        console.log(method)
       }
     }
   }
 </script>
 
 <style>
-  /*html {*/
-  /*height: 100%;*/
-  /*}*/
+  /*html {
+  height: 100%;
+  }
 
-  /*body {*/
-  /*display: flex;*/
-  /*align-items: center;*/
-  /*justify-content: center;*/
-  /*height: 100%;*/
-  /*}*/
+  body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  }
 
-  /*#app {*/
-  /*color: #2c3e50;*/
-  /*margin-top: -100px;*/
-  /*max-width: 600px;*/
-  /*font-family: Source Sans Pro, Helvetica, sans-serif;*/
-  /*text-align: center;*/
-  /*}*/
+  #app {
+  color: #2c3e50;
+  margin-top: -100px;
+  max-width: 600px;
+  font-family: Source Sans Pro, Helvetica, sans-serif;
+  text-align: center;
+  }
 
-  /*#app a {*/
-  /*color: #42b983;*/
-  /*text-decoration: none;*/
-  /*}*/
+  #app a {
+  color: #42b983;
+  text-decoration: none;
+  }
 
-  /*.logo {*/
-  /*width: 100px;*/
-  /*height: 100px*/
-  /*}*/
+  .logo {
+  width: 100px;
+  height: 100px
+  }*/
 </style>
