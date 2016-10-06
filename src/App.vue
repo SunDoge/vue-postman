@@ -60,7 +60,8 @@
         VPM: {
           headers: {
             'content-type': 'application/json',
-            'cache-control': 'no-cache'
+            'cache-control': 'no-cache',
+            'Authorization': 'Bearer ' + token
           },
           data: '',
           content: 'test',
