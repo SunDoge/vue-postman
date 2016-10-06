@@ -62,6 +62,7 @@
             'content-type': 'application/json',
             'cache-control': 'no-cache'
           },
+          data: '',
           content: 'test',
           status: '000',
           status_text: 'prepared',
@@ -95,6 +96,7 @@
       },
       sentRequest: function (method) {
         let vpm = this.VPM
+        console.log(vpm.data)
         this.$http({
           method: method,
           url: vpm.url,
@@ -102,20 +104,20 @@
           headers: vpm.headers,
           emulateJSON: true
         }).then((response) => {
-          let vpm = this.VPM
           vpm.status = response.status
           vpm.status_text = response.statusText
-          let body = response.body
-          vpm.content = body
-          console.log(body)
+          vpm.content = response.body
+          console.log(response)
         }, (response) => {
           console.log(response)
+          vpm.status = response.status
+          vpm.status_text = response.statusText
+          vpm.content = response.body
         })
       },
       send: function (method) {
         this.sentRequest(method)
         console.log(method)
-        console.log(this.VPM.data)
       }
     }
   }
